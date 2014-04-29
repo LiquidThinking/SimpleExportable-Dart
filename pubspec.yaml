@@ -1,0 +1,7 @@
+name: simple_exportable
+version: 0.0.1
+authors:
+- jrote1<jrote1@me.com>
+- adeel41
+description: A Simple Library that encodes/decodes object from json
+homepage: https://github.com/LiquidThinking/SimpleExportable-Dart
