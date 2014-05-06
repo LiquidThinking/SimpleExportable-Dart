@@ -1,21 +1,21 @@
 import 'dart:mirrors';
 
 class Exportable {
-  static ClassMirror _getActualTypeFromVariableMirror(VariableMirror type){
-    if(type is List){
+  static ClassMirror _getActualTypeFromVariableMirror(VariableMirror type) {
+    if (type is List) {
       return type.type.typeArguments[0];
     }
     return type.type;
   }
-  
-  static Type _getActualType(Type type){
+
+  static Type _getActualType(Type type) {
     ClassMirror reflectedType = reflectClass(type);
-      if(reflectedType is List){
-        return reflectedType.typeArguments[0].reflectedType;
-      }
-      return reflectedType.reflectedType;
+    if (reflectedType is List) {
+      return reflectedType.typeArguments[0].reflectedType;
     }
-  
+    return reflectedType.reflectedType;
+  }
+
   static bool _isExportableClass(VariableMirror variableMirror) {
     var actualType = _getActualTypeFromVariableMirror(variableMirror);
     if (actualType is ClassMirror) {
@@ -57,10 +57,10 @@ class Exportable {
           if (matchedKeys.length > 0) {
             var value = json[matchedKeys.elementAt(0)];
 
-            if (_isJsonSupported(value)) {
-              thisMirror.setField(declarationMirror.simpleName, _importSimpleValue(declarationMirror.type.reflectedType, value));
-            } else if (_isExportableClass(value)) {
+            if (_isExportableClass(declarationMirror)) {
               thisMirror.setField(declarationMirror.simpleName, getInstatiatedTypeForJson(declarationMirror.type.reflectedType, value));
+            } else if (_isJsonSupported(value)) {
+              thisMirror.setField(declarationMirror.simpleName, _importSimpleValue(declarationMirror.type.reflectedType, value));
             }
           }
         }
