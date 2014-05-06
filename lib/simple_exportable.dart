@@ -29,6 +29,7 @@ class Exportable {
   }
 
   static Object getInstatiatedTypeForJson(Type type, dynamic json) {
+    if (json == null) return null;
     if (json is List) {
       var result = [];
       json.forEach((e) => result.add(getInstatiatedTypeForJson(type, e)));

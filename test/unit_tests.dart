@@ -62,4 +62,13 @@ void main() {
         expect(result.flatClasses[1].id, 2);
                 expect(result.flatClasses[1].name, "Fred");
       });
+  
+  test('for object with null sub object filles properties', () {
+          var json = JSON.decode('''{"flatClass": null, "name": "the name"}''');
+          LayerdClass result = Exportable.getInstatiatedTypeForJson(LayerdClass, json);
+
+          expect(result.name, "the name");
+          
+          expect(result.flatClass, null);
+        });
 }
