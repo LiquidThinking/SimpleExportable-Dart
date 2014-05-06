@@ -2,7 +2,7 @@ import 'dart:mirrors';
 
 class Exportable {
   static ClassMirror _getActualTypeFromVariableMirror(VariableMirror type) {
-    if (reflectClass(List).qualifiedName == type.type.qualifiedName) {
+    if (reflectClass(List) == type.type) {
       return type.type.typeArguments[0];
     }
     return type.type;
@@ -45,7 +45,7 @@ class Exportable {
 
   static Object getInstatiatedTypeForJson(Type type, dynamic json) {
 
-    if (type is List || json is List) {
+    if (reflectClass(type) == reflectClass(List) || json is List) {
       return json.map((e) => getInstatiatedTypeForJson(_getActualType(type), e));
     } else {
       var result = reflectClass(type).newInstance(const Symbol(''), []).reflectee;
