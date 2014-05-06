@@ -19,7 +19,7 @@ class Exportable {
 				var name = MirrorSystem.getName(declarationMirror.simpleName);
 				var matchedKeys = json.keys.where((String key)=>key.toLowerCase() == name.toLowerCase());
 				if (matchedKeys.length > 0) {
-					var value = json[matchedKeys.first()];
+					var value = json[matchedKeys.elementAt(0)];
 					if (isExportableClass(declarationMirror)) {
 						thisMirror.setField(declarationMirror.simpleName, getInstatiatedTypeForJson(declarationMirror.type.reflectedType, value));
 					} else {
