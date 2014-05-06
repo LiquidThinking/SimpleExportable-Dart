@@ -44,7 +44,7 @@ class Exportable {
 
   static Object getInstatiatedTypeForJson(Type type, dynamic json) {
 
-    if (type is List) {
+    if (type is List || json is List) {
       return json.map((e) => getInstatiatedTypeForJson(_getActualType(type), e));
     } else {
       var result = reflectClass(type).newInstance(const Symbol(''), []).reflectee;
