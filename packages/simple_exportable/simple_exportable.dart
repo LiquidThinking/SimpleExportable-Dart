@@ -2,7 +2,7 @@ import 'dart:mirrors';
 
 class Exportable {
   static ClassMirror _getActualTypeFromVariableMirror(VariableMirror type) {
-    if (reflectClass(List) == type.type) {
+    if (reflectClass(List).qualifiedName == type.type.qualifiedName) {
       return type.type.typeArguments[0];
     }
     return type.type;
